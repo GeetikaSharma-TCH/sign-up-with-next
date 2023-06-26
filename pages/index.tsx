@@ -2,10 +2,32 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-
+import axios from 'axios'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const getData = () => {
+    const url =
+    'https://accounts.zoho.com/oauth/v2/auth?response_type=code&client_id=1000.N048ZP6F4A8B2F7T8BR0FL2RDTVZRG&scope=ZohoProjects.portals.ALL&redirect_uri=http://localhost:3000/SignIn/signIn&prompt=consent'
+    
+    axios.get(url, {
+      headers: {
+      'Content-Type': "application/json;charset=utf-8",
+      'Access-Control-Allow-Origin': 'http://localhost:3000',
+      }  
+    })
+    .then((res) => console.log('res', res))
+    .catch((err) => console.log('err', err))
+
+    //getToken()
+  }
+
+  const getToken = () => {
+    axios.post('https://accounts.zoho.com/oauth/v2/token?client_id=1000.N048ZP6F4A8B2F7T8BR0FL2RDTVZRG&grant_type=authorization_code&client_secret=442f37ba77a2a42b719d9aad641ba3d81b978b9d54&redirect_uri=http://localhost:3000/SignIn/signIn&code=1000.161c71ea2e9246507597f95451bc8331.e794382aef768e56396eebbda3a07fe1')
+    .then((result) => console.log("result", result))
+    .catch((err) => console.log(err))
+  }
+
   return (
     <>
       <Head>
@@ -20,6 +42,8 @@ export default function Home() {
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
           </p>
+          <button onClick={getData}>Sign In with Facebook</button>
+
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
