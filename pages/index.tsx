@@ -2,31 +2,73 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import Link from 'next/link'
 import axios from 'axios'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const description = "sdsdasdas"
+
+  // API for get code 
   const getData = () => {
-    const url =
-    'https://accounts.zoho.com/oauth/v2/auth?response_type=code&client_id=1000.N048ZP6F4A8B2F7T8BR0FL2RDTVZRG&scope=ZohoProjects.portals.ALL&redirect_uri=http://localhost:3000/SignIn/signIn&prompt=consent'
+    // const url =
+    // 'https://accounts.zoho.com/oauth/v2/auth?response_type=code&client_id=1000.0TA4E9SZNQYLO5AWXP2HASB597VRXA&scope=ZohoProjects.portals.ALL&redirect_uri=http://localhost:3000/SignIn/signIn&prompt=consent'
     
-    axios.get(url, {
+    // axios.get(url, {
+    //   params: {
+    //   // 'Content-Type': "application/json;charset=utf-8",
+    //   'Access-Control-Allow-Origin': '*',
+    //   'Content-Type' : 'application/json',
+    //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+    //   }, 
+    // })
+    // .then((res) => console.log('res', res))
+    // .catch((err) => console.log('err', err))
+    fetch("https://accounts.zoho.com/oauth/v2/auth?response_type=code&client_id=1000.O3RQOWFXUSDQP6Y653532BMOAYL1MQ&scope=ZohoProjects.portals.ALL&scope=ZohoProjects.projects.ALL&scope=ZohoProjects.tasks.ALL&redirect_uri=http://localhost:3000/SignIn/signIn&prompt=consent&access_type=offline", {
+      method: "GET",
+      mode : "no-cors",
+      // body: JSON.stringify({
+      //   description,
+      // }),
       headers: {
-      'Content-Type': "application/json;charset=utf-8",
-      'Access-Control-Allow-Origin': 'http://localhost:3000',
-      }  
+        "content-type": "application/json",
+      },
     })
-    .then((res) => console.log('res', res))
-    .catch((err) => console.log('err', err))
+    .then((res) => console.log(res))
+    .catch((e) => console.log(e));
 
     //getToken()
+
   }
 
-  const getToken = () => {
-    axios.post('https://accounts.zoho.com/oauth/v2/token?client_id=1000.N048ZP6F4A8B2F7T8BR0FL2RDTVZRG&grant_type=authorization_code&client_secret=442f37ba77a2a42b719d9aad641ba3d81b978b9d54&redirect_uri=http://localhost:3000/SignIn/signIn&code=1000.161c71ea2e9246507597f95451bc8331.e794382aef768e56396eebbda3a07fe1')
-    .then((result) => console.log("result", result))
-    .catch((err) => console.log(err))
-  }
+  // // API for get Authorization Token
+  // const getToken = () => {
+  //   axios.post('https://accounts.zoho.com/oauth/v2/token?client_id=1000.O3RQOWFXUSDQP6Y653532BMOAYL1MQ&grant_type=authorization_code&client_secret=9882d908d4b2fe458393e345a909b8fc5fc7a2acae&redirect_uri=http://localhost:3000/SignIn/signIn&code=1000.f5fe92fe55ce60346413fa37480ac261.a61b2719091f5793885b6f3e8d152b8a')
+  //   .then((result) => console.log("result", result))
+  //   .catch((err) => console.log(err))
+  // }
+
+  // // API for get Projects
+
+  // const getProjects = () => {
+  //   axios.get('https://projectsapi.zoho.in/restapi/portal/60022279860/projects/176393000000032007/'
+  //   ).then((res) => console.log('rsess', res))
+  // }
+
+  // const getPortals = () => {
+  //   const token="1000.15fc16ab2ba9c5dfd99803303d60843b.15a4d24b1f1a88d9b92d6233bbf40bdd"
+  //   fetch("https://projectsapi.zoho.in/restapi/portals/", {
+  //     method: "GET",
+  //     mode : "no-cors",
+  //     body: JSON.stringify({
+  //       description,
+  //     }),
+  //     headers: {
+  //       "content-type": "application/json",
+  //       "Authorization": `Bearer ${token}`
+  //     },
+  //   }).catch((e) => console.log(e));
+  
 
   return (
     <>
@@ -42,7 +84,11 @@ export default function Home() {
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
           </p>
-          <button onClick={getData}>Sign In with Facebook</button>
+          <Link href="https://accounts.zoho.com/oauth/v2/auth?response_type=code&client_id=1000.W0NPL9G80Q1AI83G3T3UYWP3LRI1AU&scope=ZohoProjects.portals.ALL&scope=ZohoProjects.projects.ALL&scope=ZohoProjects.tasks.ALL&redirect_uri=http://localhost:3000/SignIn/signIn&prompt=consent&access_type=offline">
+          <button >Sign In with Facebook</button>
+
+          </Link>
+          {/* <button onClick={getPortals}>Get Portals</button> */}
 
           <div>
             <a

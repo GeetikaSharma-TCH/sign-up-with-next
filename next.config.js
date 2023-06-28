@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
+// next.config.js
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-}
-
-module.exports = nextConfig
+  swcMinify: true,
+  async rewrites() {
+    return [
+      {
+        source: "/api/todos",
+        destination: "http://localhost:3000/api/todos",
+      },
+    ];
+  },
+};
+module.exports = nextConfig;
