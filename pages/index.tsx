@@ -85,7 +85,7 @@ export default function Home() {
             <code className={styles.code}>pages/index.tsx</code>
           </p>
           <Link href="https://accounts.zoho.com/oauth/v2/auth?response_type=code&client_id=1000.W0NPL9G80Q1AI83G3T3UYWP3LRI1AU&scope=ZohoProjects.portals.ALL&scope=ZohoProjects.projects.ALL&scope=ZohoProjects.tasks.ALL&redirect_uri=http://localhost:3000/SignIn/signIn&prompt=consent&access_type=offline">
-          <button >Sign In with Facebook</button>
+          <button >Sign In with Zoho Account</button>
 
           </Link>
           {/* <button onClick={getPortals}>Get Portals</button> */}
